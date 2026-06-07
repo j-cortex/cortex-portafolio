@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J-Cortex Portfolio</title>
+    <style>
+        /* --- ESTILOS GENERALES (Oscuro y moderno) --- */
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 { color: #00dfa2; margin-bottom: 5px; font-size: 2.5rem; }
+        p { color: #aaa; margin-top: 0; }
+
+        /* --- CATEGORÍAS (Plataformas) --- */
+        .tabs-container { margin: 30px 0 15px 0; }
+        .tab-btn {
+            background: #1e1e1e;
+            color: #fff;
+            border: 2px solid #333;
+            padding: 12px 24px;
+            margin: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .tab-btn.active, .tab-btn:hover {
+            background: #00dfa2;
+            color: #121212;
+            border-color: #00dfa2;
+        }
+
+        /* --- FILTROS DE NIVEL --- */
+        .filters-container { margin-bottom: 30px; }
+        .filter-btn {
+            background: none;
+            color: #aaa;
+            border: 1px solid #444;
+            padding: 6px 16px;
+            margin: 4px;
+            cursor: pointer;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            color: #fff;
+            border-color: #fff;
+            background: #252525;
+        }
+
+        /* --- GRILLA DE VIDEOS --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Tarjeta de video */
+        .video-card {
+            background: #1e1e1e;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #2a2a2a;
+            display: block;
+        }
+
+        /* Reproductor de Video */
+        .video-card video {
+            width: 100%;
+            display: block;
+            background: #000;
+        }
+
+        /* Proporciones según el formato del video */
+        .video-card.horizontal video {
+            aspect-ratio: 16 / 9;
+        }
+        .video-card.vertical video {
+            aspect-ratio: 9 / 16;
+            max-height: 550px; /* Para que los verticales no se hagan gigantes en pantalla grande */
+            object-fit: cover;
+        }
+
+        .video-info { padding: 15px; text-align: left; }
+        .video-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; }
+        
+        /* Etiqueta de nivel */
+        .level-badge {
+            display: inline-block;
+            background: #333;
+            color: #00dfa2;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>J-Cortex Portfolio</h1>
+        <p>Editor de Video & Motion Designer</p>
+    </header>
+
+    <div class="tabs-container">
+        <button class="tab-btn active" onclick="filtrarPlataforma('youtube')">YouTube</button>
+        <button class="tab-btn" onclick="filtrarPlataforma('tiktok')">TikTok</button>
+        <button class="tab-btn" onclick="filtrarPlataforma('instagram')">Instagram</button>
+        <button class="tab-btn" onclick="filtrarPlataforma('motion')">Motion Graphics</button>
+    </div>
+
+    <div class="filters-container">
+        <button class="filter-btn active" onclick="filtrarNivel('todos')">Todos los niveles</button>
+        <button class="filter-btn" onclick="filtrarNivel('basico')">Básico</button>
+        <button class="filter-btn" onclick="filtrarNivel('medio')">Medio</button>
+        <button class="filter-btn" onclick="filtrarNivel('avanzado')">Avanzado</button>
+    </div>
+
+    <main class="portfolio-grid" id="portfolio-grid">
+        
+        <div class="video-card horizontal" data-plataforma="youtube" data-nivel="basico">
+            <video controls>
+                <source src="video1.mp4" type="video/mp4">
+                Tu navegador no soporta videos.
+            </video>
+            <div class="video-info">
+                <h3>Título de tu video de YouTube</h3>
+                <span class="level-badge">Básico</span>
+            </div>
+        </div>
+
+        <div class="video-card vertical" data-plataforma="tiktok" data-nivel="medio">
+            <video controls>
+                <source src="tiktokedit.mp4" type="video/mp4">
+                Tu navegador no soporta videos.
+            </video>
+            <div class="video-info">
+                <h3></h3>
+                <span class="level-badge">medio</span>
+            </div>
+        </div>
+
+        <div class="video-card horizontal" data-plataforma="motion" data-nivel="medio">
+            <video controls>
+                <source src="video3.mp4" type="video/mp4">
+                Tu navegador no soporta videos.
+            </video>
+            <div class="video-info">
+                <h3>Proyecto de Motion Graphics</h3>
+                <span class="level-badge">Medio</span>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        let plataformaActual = 'youtube';
+        let nivelActual = 'todos';
+
+        function filtrarPlataforma(plataforma) {
+            plataformaActual = plataforma;
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            aplicarFiltros();
+        }
+
+        function filtrarNivel(nivel) {
+            nivelActual = nivel;
+
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            aplicarFiltros();
+        }
+
+        function aplicarFiltros() {
+            const tarjetas = document.querySelectorAll('.video-card');
+
+            tarjetas.forEach(tarjeta => {
+                const plat = tarjeta.getAttribute('data-plataforma');
+                const niv = tarjeta.getAttribute('data-nivel');
+
+                const coincidePlataforma = (plat === plataformaActual);
+                const coincideNivel = (nivelActual === 'todos' || niv === nivelActual);
+
+                if (coincidePlataforma && coincideNivel) {
+                    tarjeta.style.display = 'block';
+                } else {
+                    tarjeta.style.display = 'none';
+                    // Pausa el video automáticamente si se oculta la tarjeta
+                    const video = tarjeta.querySelector('video');
+                    if(video) video.pause();
+                }
+            });
+        }
+
+        // Iniciar mostrando YouTube por defecto
+        filtrarPlataforma('youtube');
+    </script>
+</body>
+</html>
