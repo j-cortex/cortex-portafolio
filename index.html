@@ -4,7 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>J-Cortex Portfolio</title>
-    <style>
+    <style>.foto-presentacion {
+    width: 300px;         /* Ajustá el tamaño a tu gusto */
+    height: 300px;        /* Igual al ancho para mantener el cuadrado */
+    object-fit: cover;    /* Recorta la imagen para que rellene el cuadrado sin estirarse */
+    border: 3px solid #00dfa2; /* El borde neón de tu estilo */
+    display: block;
+    margin: 0 auto;       /* Centra la foto */
+    border-radius: 10px;  /* Esto le da esquinas apenas redondeadas, muy moderno */
+}
         /* --- ESTILOS GENERALES (Oscuro y moderno) --- */
         body {
             background-color: #121212;
@@ -107,8 +115,15 @@
    
 </style>
 </head>
-<body>
-
+<body><section class="presentacion">
+    <img src="portadaportfoliocortex.jpg" alt="J-Cortex" class="avatar-perfil">
+    
+    <div class="texto-intro">
+        <h2>Hola, soy Benjamin (J-Cortex)</h2>
+        <p>Editor de video especializado en contenido dinámico y retención de audiencia.</p>
+    </div>
+</section>
+<img src="images/foto-presentacion-jcortex.png" alt="Presentación de J-Cortex - Video Editor" class="avatar-perfil">
     <header>
         <h1>J-Cortex Portfolio</h1>
         <p>Editor de Video & Motion Designer</p>
